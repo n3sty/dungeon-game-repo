@@ -7,9 +7,11 @@ public class Player : MonoBehaviour
     private BoxCollider2D boxCollider;
     private RaycastHit2D hit;
     private Vector3 moveDelta;
+    public float movementSpeed;
 
     void Start()
     {
+        // Getting the boxCollider component for the player
         boxCollider = GetComponent<BoxCollider2D>();
     }
 
@@ -18,7 +20,7 @@ public class Player : MonoBehaviour
         float x = Input.GetAxisRaw("Horizontal");
         float y = Input.GetAxisRaw("Vertical");
 
-        // Reset moveDelta
+        // Reset moveDelta and normalize it, otherwise diagonal speed would exceed axial speed
         moveDelta = new Vector3(x, y, 0).normalized;
 
         // Swap sprite direction going right or left
@@ -35,19 +37,15 @@ public class Player : MonoBehaviour
         hit = Physics2D.BoxCast(transform.position, boxCollider.size, 0, new Vector2(0, moveDelta.y), Mathf.Abs(moveDelta.y * Time.deltaTime), LayerMask.GetMask("Actor", "Blocking"));
         if (hit.collider == null)
         {
-            // Make this character move
-            transform.Translate(0, moveDelta.y * Time.deltaTime, 0);
+            // Make this character move on the y-axis
+            transform.Translate(0, moveDelta.y * Time.deltaTime * movementSpeed, 0);
         }
 
         hit = Physics2D.BoxCast(transform.position, boxCollider.size, 0, new Vector2(moveDelta.x, 0), Mathf.Abs(moveDelta.x * Time.deltaTime), LayerMask.GetMask("Actor", "Blocking"));
         if (hit.collider == null)
         {
-            // Make this character move
-            transform.Translate(moveDelta.x * Time.deltaTime, 0, 0);
+            // Make this character move on the x-axis
+            transform.Translate(moveDelta.x * Time.deltaTime * movementSpeed, 0, 0);
         }
-
-
-
     }
-
 }

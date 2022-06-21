@@ -33,7 +33,7 @@ public class Collideable : MonoBehaviour
 
     protected virtual void OnCollide(Collider2D coll)
     {
-        Debug.Log(coll.name);
+        
     }
 
 }

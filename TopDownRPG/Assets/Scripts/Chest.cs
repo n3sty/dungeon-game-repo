@@ -13,8 +13,8 @@ public class Chest : Collectible
         {
             collected = true;
             GetComponent<SpriteRenderer>().sprite = emptyChest;
-        }
 
-        Debug.Log("Grant " + cashAmount + " cash!");
+            Debug.Log("Grant " + cashAmount + " cash!");
+        }
     }
 }
