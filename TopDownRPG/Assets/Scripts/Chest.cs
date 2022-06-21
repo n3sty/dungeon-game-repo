@@ -15,6 +15,6 @@ public class Chest : Collectible
             GetComponent<SpriteRenderer>().sprite = emptyChest;
         }
 
-        Debug.Log("Grant " + cashAmount + " moneys!");
+        Debug.Log("Grant " + cashAmount + " cash!");
     }
 }

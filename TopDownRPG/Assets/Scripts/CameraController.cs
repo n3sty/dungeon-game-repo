@@ -27,7 +27,7 @@ public class CameraController : MonoBehaviour
             }
         }
 
-        // This is to check if we're on the bounds of the X-axis
+        // This is to check if we're on the bounds of the Y-axis
         float deltaY = lookat.position.y - transform.position.y;
         if (deltaY > boundY || deltaY < -boundY)
         {
