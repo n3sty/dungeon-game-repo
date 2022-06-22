@@ -41,7 +41,18 @@ public class Weapon : Collideable
     {
         if (coll.tag == "Fighter")
         {
-            Debug.Log(coll.name);
+            if (coll.name == "Player")
+                return;
+
+            // Create a new damage object and send it to the fighter we've hit
+            Damage dmg = new()
+            {
+                damageAmount = damagePoint,
+                origin = transform.position,
+                pushForce = pushForce
+            };
+
+            coll.SendMessage("ReceiveDamage", dmg);
         }
     }
 
