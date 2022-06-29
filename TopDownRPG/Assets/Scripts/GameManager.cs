@@ -33,11 +33,27 @@ public class GameManager : MonoBehaviour
     // Logic
     public int money;
     public int experience;
-
+    
     // Floating text
     public void ShowText(string msg, int fontSize, Color colour, Vector3 position, Vector3 motion, float duration)
     {
         floatingTextManager.Show(msg, fontSize, colour, position, motion, duration);
+    }
+
+    public bool TryUpgradeWeapon()
+    {
+        // Is the weapon maxed?
+        if (weaponPrizes.Count <= weapon.weaponLevel)
+            return false;
+
+        // Is there enough cash?
+        if (money >= weaponPrizes[weapon.weaponLevel])
+        {
+            money -= weaponPrizes[weapon.weaponLevel];
+            weapon.UpgradeWeapon();
+            return true;
+        }
+        return false;
     }
 
     // Save state
@@ -47,6 +63,7 @@ public class GameManager : MonoBehaviour
      * INT experience
      * INT weaponLevel
      */
+
     public void SaveState()
     {
         Debug.Log("SaveState() initiated");
